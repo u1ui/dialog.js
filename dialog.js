@@ -62,7 +62,7 @@ export function confirm(title) {
     dialog.value = false;
     return dialog.show();
 };
-export function prompt(title, default) {
+export function prompt(title, initial) {
     var dialog = new Dialog({
         body: title+'<br><input style="width:20em; max-width:100%">',
         buttons:[
@@ -71,7 +71,7 @@ export function prompt(title, default) {
         ]
     });
     var input = dialog.element.querySelector('input');
-    input.value = default;
+    input.value = initial;
     setTimeout(()=>input.focus());
     dialog.value = null;
     return dialog.show();
