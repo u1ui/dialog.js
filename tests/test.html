@@ -36,47 +36,46 @@
     <h2>alert, confirm, prompt</h2>
     <table>
         <tr>
-            <td> <button id=test1>run</button>
+            <td>
+                <button id=test1>run</button>
+                <button id=nativ1>run nativ</button>
             <td> <script style="display:block">
 test1.addEventListener('click',async e=>{
     const result = await dialog.alert('Just a test');
     console.log(result)
 });</script>
 
-            <td> <button id=nativ1>run nativ</button>
-            <td> <script>
+<script>
 nativ1.addEventListener('click',async e=>{
     const result = alert('Just a test');
     console.log(result)
 });</script>
 
-
         <tr>
-            <td> <button id=test2>run</button>
+            <td>
+                <button id=test2>run</button>
+                <button id=nativ2>run nativ</button>
             <td> <script style="display:block">
 test2.addEventListener('click',async e=>{
     const result = await dialog.confirm('Really?');
     console.log(result)
 });</script>
-
-                <td> <button id=nativ2>run nativ</button>
-                <td> <script>
+<script>
 nativ2.addEventListener('click',async e=>{
     const result = confirm('Really?')
     console.log(result)
 });</script>
 
         <tr>
-            <td> <button id=test3>run</button>
+            <td>
+                <button id=test3>run</button>
+                <button id=nativ3>run nativ</button>
             <td> <script style="display:block">
 test3.addEventListener('click',async e=>{
     const result = await dialog.prompt('value:', '1000');
     console.log(result)
 });</script>
-
-            <td>
-                <button id=nativ3>run nativ</button>
-                <td> <script>
+<script>
 nativ3.addEventListener('click',async e=>{
     const result = prompt('value:', '1000');
     console.log(result)
@@ -121,3 +120,12 @@ nativ3.addEventListener('click',async e=>{
         });
     </script-->
 </section>
+
+<style style="display:block" contenteditable>
+.u1x-modal {
+    width:18rem;
+    box-shadow:0 0 1rem #0008;
+    border:none;
+    border-radius:.3rem;
+}
+</style>
