@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head lang=en>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width">
+
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/base.css/full.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/variables.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/classless.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/aria.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js@1.1.0/mod.min.js"></script>
+
+    <script src="../dialog.js" type=module></script>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>dialog.js tests</h1>
+    </header>
+
+<script>
+    var dialog = null;
+    import('../dialog.js').then(x=>{
+        dialog=x
+    });
+</script>
+
+    <section>
+        <h2>Test</h2>
+        <table>
+            <tr>
+                <td> <button id=test1>run</button>
+                <td> <script style="display:block">
+test1.addEventListener('click',async e=>{
+    const result = await dialog.alert('test')
+    console.log(result)
+});</script>
+
+                <td> <button id=nativ1>run nativ</button>
+                <td> <script>
+nativ1.addEventListener('click',async e=>{
+    const result = alert('test')
+    console.log(result)
+});</script>
+
+
+            <tr>
+                <td> <button id=test2>run</button>
+                <td> <script style="display:block">
+test2.addEventListener('click',async e=>{
+    const result = await dialog.confirm('really?')
+    console.log(result)
+});</script>
+
+                    <td> <button id=nativ2>run nativ</button>
+                    <td> <script>
+nativ2.addEventListener('click',async e=>{
+    const result = confirm('really?')
+    console.log(result)
+});</script>
+
+            <tr>
+                <td> <button id=test3>run</button>
+                <td> <script style="display:block">
+test3.addEventListener('click',async e=>{
+    const result = await dialog.prompt('value:', '1000')
+    console.log(result)
+});</script>
+
+                <td>
+                    <button id=nativ3>run nativ</button>
+                    <td> <script>
+nativ3.addEventListener('click',async e=>{
+    const result = prompt('value:')
+    console.log(result)
+});</script>
+
+
+        </table>
+    </section>
