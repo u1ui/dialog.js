@@ -4,12 +4,6 @@ const d = document;
 d.head.insertAdjacentHTML(
     'afterbegin',
     '<style>'+
-    '.u1x-modal {'+
-    //'   width:18rem;'+
-    //'   box-shadow:0 0 1rem #0008;'+
-    //'   border:none;'+
-    //'   border-radius:.3rem;'+
-    '}'+
     '.u1x-modal .-buttons {'+
     '   display:flex;'+
     '   flex-wrap:wrap;'+
@@ -40,7 +34,6 @@ class Dialog {
             el.value = btn.value;
             el.addEventListener('click', e=>{
                 btn.then && btn.then.call(this,e);
-//                element.close();
             });
             btnCont.appendChild(el);
             if (i === 0) setTimeout(()=>el.focus());
@@ -58,24 +51,6 @@ class Dialog {
         });
     }
 }
-
-/*
-export function form(html){
-    var dialog = new Dialog({
-        body:html,
-        buttons:[{title:'OK',then(){
-            var form = dialog.element.querySelector('form');
-            var data = {};
-            form.querySelectorAll('input,textarea').forEach(el=>{
-                data[el.name] = el.value;
-                if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
-            });
-            dialog.value = data;
-        }}]
-    });
-    return dialog.show();
-}
-*/
 
 export function alert(text) {
     var dialog = new Dialog({
@@ -109,8 +84,26 @@ export function prompt(text, initial) {
     dialog.value = null;
     return dialog.show();
 };
+/*
+export function form(html){
+    var dialog = new Dialog({
+        body:html,
+        buttons:[{title:'OK',then(){
+            var form = dialog.element.querySelector('form');
+            var data = {};
+            form.querySelectorAll('input,textarea').forEach(el=>{
+                data[el.name] = el.value;
+                if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
+            });
+            dialog.value = data;
+        }}]
+    });
+    return dialog.show();
+}
+*/
 
 
+// helper functions
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
