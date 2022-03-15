@@ -10,3 +10,6 @@ alert, prompt, confirm but async and stylable
     const name = await prompt('What is your name?', 'John Doe');
 </script>
 ```
+## Demo
+https://raw.githack.com/u1ui/dialog.js/main/tests/test.html  
+
