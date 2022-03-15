@@ -11,6 +11,7 @@
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/aria.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
+    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/table.class/table.css">
 
     <script src="https://cdn.jsdelivr.net/gh/nuxodin/cleanup.js@1.1.0/mod.min.js"></script>
 
@@ -31,56 +32,92 @@
     });
 </script>
 
-    <section>
-        <h2>Test</h2>
-        <table>
-            <tr>
-                <td> <button id=test1>run</button>
-                <td> <script style="display:block">
+<section>
+    <h2>alert, confirm, prompt</h2>
+    <table>
+        <tr>
+            <td> <button id=test1>run</button>
+            <td> <script style="display:block">
 test1.addEventListener('click',async e=>{
-    const result = await dialog.alert('test')
+    const result = await dialog.alert('Just a test');
     console.log(result)
 });</script>
 
-                <td> <button id=nativ1>run nativ</button>
-                <td> <script>
+            <td> <button id=nativ1>run nativ</button>
+            <td> <script>
 nativ1.addEventListener('click',async e=>{
-    const result = alert('test')
+    const result = alert('Just a test');
     console.log(result)
 });</script>
 
 
-            <tr>
-                <td> <button id=test2>run</button>
-                <td> <script style="display:block">
+        <tr>
+            <td> <button id=test2>run</button>
+            <td> <script style="display:block">
 test2.addEventListener('click',async e=>{
-    const result = await dialog.confirm('really?')
+    const result = await dialog.confirm('Really?');
     console.log(result)
 });</script>
 
-                    <td> <button id=nativ2>run nativ</button>
-                    <td> <script>
+                <td> <button id=nativ2>run nativ</button>
+                <td> <script>
 nativ2.addEventListener('click',async e=>{
-    const result = confirm('really?')
+    const result = confirm('Really?')
     console.log(result)
 });</script>
 
-            <tr>
-                <td> <button id=test3>run</button>
-                <td> <script style="display:block">
+        <tr>
+            <td> <button id=test3>run</button>
+            <td> <script style="display:block">
 test3.addEventListener('click',async e=>{
-    const result = await dialog.prompt('value:', '1000')
+    const result = await dialog.prompt('value:', '1000');
     console.log(result)
 });</script>
 
-                <td>
-                    <button id=nativ3>run nativ</button>
-                    <td> <script>
+            <td>
+                <button id=nativ3>run nativ</button>
+                <td> <script>
 nativ3.addEventListener('click',async e=>{
-    const result = prompt('value:', '1000')
+    const result = prompt('value:', '1000');
     console.log(result)
 });</script>
 
 
-        </table>
-    </section>
+    </table>
+</section>
+
+
+<section>
+    <h2>Tests</h2>
+
+    <button onclick="dialog.alert('Html content: <b>bold</b>')">Html content not parsed </button>
+
+    <br>
+    <br>
+
+    <!--button id=formTest>form() (beta)</button>
+    <script>
+        formTest.addEventListener('click',async e=>{
+            const result = await dialog.form(`
+            <b>Fill the form</b>
+            <div class="u1-table -Fields -Flex -NoSideGaps">
+                <div>
+                    <label>
+                        <div>Firstname:</div>
+                        <div><input name=firstname required></div>
+                    </label>
+                    <label>
+                        <div>Lastname:</div>
+                        <div><input name=lastname></div>
+                    </label>
+                    <label>
+                        <div>Accept AGB:</div>
+                        <div><input type=checkbox name=agb value=1></div>
+                    </label>
+                </div>
+            </div>
+            `);
+            console.log(result)
+        });
+    </script-->
+</section>

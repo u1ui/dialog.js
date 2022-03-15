@@ -1,40 +1,54 @@
 const d = document;
 
+
+d.head.insertAdjacentHTML(
+    'afterbegin',
+    '<style>'+
+    '.u1x-modal {'+
+    //'   width:18rem;'+
+    //'   box-shadow:0 0 1rem #0008;'+
+    //'   border:none;'+
+    //'   border-radius:.3rem;'+
+    '}'+
+    '.u1x-modal .-buttons {'+
+    '   display:flex;'+
+    '   justify-content:flex-end;'+
+    '   gap:.5rem;'+
+    '   margin-top:1rem;'+
+    '}'+
+    '</style>'
+);
+
 class Dialog {
     constructor(options) {
 
         const tmpl = d.createElement('template');
         tmpl.innerHTML =
-        '<dialog>'+
-        '	<div class=-head>'+
-        '		<div class=-title>'+(options.title??'')+'</div>'+
-        '	</div>'+
-        (options.body?
-        '	<div class=-body>'+options.body+'</div>':'')+
-        (options.foot||options.buttons?
-        '	<div class=-foot>'+
-        '		<div class=-buttons></div>'+
-        '	</div>':'')+
+        '<dialog class=u1x-modal>'+
+        '	<form method=dialog>'+
+                options.body+
+                (options.buttons?'<div class=-buttons></div>':'')+
+        '	</form>'+
         '</dialog>';
         const element = this.element = tmpl.content.firstChild;
 
-
-        const btnCont = element.querySelector('.-foot>.-buttons');
-        options.buttons && options.buttons.forEach(function(btn, i){
-            var el = document.createElement('button');
+        const btnCont = element.querySelector('.-buttons');
+        options.buttons && options.buttons.forEach((btn, i)=>{
+            const el = document.createElement('button');
             el.innerHTML = btn.title;
-            el.addEventListener('click',(e)=>{
+            el.value = btn.value;
+            el.addEventListener('click', e=>{
                 btn.then && btn.then.call(this,e);
-                element.close();
+//                element.close();
             });
             btnCont.appendChild(el);
             if (i === 0) setTimeout(()=>el.focus());
         });
     }
     show(){
-        var element = this.element;
-        document.body.appendChild(this.element);
-        this.element.showModal();
+        const element = this.element;
+        document.body.appendChild(element);
+        element.showModal();
         return new Promise((resolve, reject)=>{
             element.addEventListener('close',()=>{
                 resolve(this.value);
@@ -44,30 +58,48 @@ class Dialog {
     }
 }
 
-export function alert(body) {
+/*
+export function form(html){
     var dialog = new Dialog({
-        body,
+        body:html,
+        buttons:[{title:'OK',then(){
+            var form = dialog.element.querySelector('form');
+            var data = {};
+            form.querySelectorAll('input,textarea').forEach(el=>{
+                data[el.name] = el.value;
+                if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
+            });
+            dialog.value = data;
+        }}]
+    });
+    return dialog.show();
+}
+*/
+
+export function alert(text) {
+    var dialog = new Dialog({
+        body:htmlEntities(text),
         buttons:[{title:'OK'}]
     });
     return dialog.show();
 };
-export function confirm(title) {
+export function confirm(text) {
     var dialog = new Dialog({
-        body:title,
+        body:htmlEntities(text),
         buttons:[
             {title:'OK',then(){ dialog.value = true; } },
-            {title:'Abbrechen'}
+            {title:t('Cancel')}
         ]
     });
     dialog.value = false;
     return dialog.show();
 };
-export function prompt(title, initial) {
+export function prompt(text, initial) {
     var dialog = new Dialog({
-        body: title+'<br><input style="width:20em; max-width:100%">',
+        body: htmlEntities(text)+'<input style="width:100%; display:block; margin-top:.5rem">',
         buttons:[
             {title:'OK',then(){ dialog.value = input.value; } },
-            {title:'Abbrechen'}
+            {title:t('Cancel')}
         ]
     });
     var input = dialog.element.querySelector('input');
@@ -76,3 +108,29 @@ export function prompt(title, initial) {
     dialog.value = null;
     return dialog.show();
 };
+
+
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function t(v) {
+    return text[v][lang()] || v;
+}
+function lang() {
+    return navigator.language.substring(0,2);
+}
+const text = {
+    'Cancel':{
+        'de':'Abbrechen',
+        'fr':'Annuler',
+        'es':'Cancelar',
+        'it':'Annulla',
+        'pt':'Cancelar',
+        'ru':'Отмена',
+        'ja':'キャンセル',
+        'ko':'취소',
+        'zh':'取消',
+        'nl':'Annuleren',
+    }
+}
