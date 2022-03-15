@@ -12,6 +12,7 @@ d.head.insertAdjacentHTML(
     '}'+
     '.u1x-modal .-buttons {'+
     '   display:flex;'+
+    '   flex-wrap:wrap;'+
     '   justify-content:flex-end;'+
     '   gap:.5rem;'+
     '   margin-top:1rem;'+
