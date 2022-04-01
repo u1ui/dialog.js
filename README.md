@@ -1,6 +1,12 @@
 # dialog.js
 alert, prompt, confirm but async and stylable
 
+# Features
+- alert(), prompt() and confirm() are API-compatible but async.
+- Uses native Dialog-Element (polyfill here:https://github.com/nuxodin/dialog-polyfill)
+- Stylable
+- Lightweight
+
 # Ussage
 
 ```html
