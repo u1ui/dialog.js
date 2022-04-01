@@ -4,7 +4,7 @@
 # Features
 - alert(), prompt() and confirm() are API-compatible but async.
 - Uses native Dialog-Element (polyfill here:https://github.com/nuxodin/dialog-polyfill)
-- Stylable
+- Minimal styled, style it yourself!
 - Lightweight
 
 # Ussage
