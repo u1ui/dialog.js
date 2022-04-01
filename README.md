@@ -1,5 +1,5 @@
 # dialog.js
-alert, prompt, confirm but async and stylable
+`alert, prompt, confirm` but async and stylable
 
 # Features
 - alert(), prompt() and confirm() are API-compatible but async.
