@@ -1,4 +1,4 @@
-//import 'http://localhost/github/dialog-polyfill/dialog.js'; // todo?
+// import 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill/dialog.min.js'; // todo?
 
 const d = document;
 
