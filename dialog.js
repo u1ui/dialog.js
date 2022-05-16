@@ -1,3 +1,5 @@
+//import 'http://localhost/github/dialog-polyfill/dialog.js'; // todo?
+
 const d = document;
 
 
