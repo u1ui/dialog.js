@@ -16,3 +16,4 @@ const name = await prompt('What is your name?', 'John Doe');
 ```
 ## Demo
 https://raw.githack.com/u1ui/dialog.js/main/tests/test.html  
+
