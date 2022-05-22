@@ -10,10 +10,9 @@
 # Ussage
 
 ```js
-import {alert, prompt, confirm} from 'https://jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.js';
+import {alert, prompt, confirm} from 'https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.min.js';
 
 const name = await prompt('What is your name?', 'John Doe');
 ```
 ## Demo
 https://raw.githack.com/u1ui/dialog.js/main/tests/test.html  
-
