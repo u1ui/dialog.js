@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang=en>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width">
+
+<body>
+
+
+<section>
+    <button onclick="dialog.alert('Just a test').then(console.log)">run</button>
+    <button onclick="console.log(alert('Just a test'))">run native</button>
+    <br>
+    <button onclick="dialog.confirm('Really?').then(console.log)">run</button>
+    <button onclick="console.log(confirm('Really?'))">run native</button>
+    <br>
+    <button onclick="dialog.prompt('value:','100').then(console.log)">run</button>
+    <button onclick="console.log(prompt('value:','100'))">run native</button>
+</section>
+
+<script>
+    var dialog = null;
+    import('../dialog.js').then(x=>{
+        dialog=x
+    });
+</script>
+
+<style>
+:where(.\:modal, :modal) {
+    width:18rem;
+    box-shadow:0 0 1rem #0008;
+    border:none;
+    border-radius:.3rem;
+}
+</style>
+
+<style>
+button {
+    text-align:left;
+    margin:1rem 0;
+}
+button::after {
+    content: attr(onclick);
+    font-weight:normal;
+    font-size:.9rem;
+    display:block;
+}
+</style>
