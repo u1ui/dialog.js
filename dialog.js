@@ -21,7 +21,7 @@ class Dialog {
 
         const tmpl = d.createElement('template');
         tmpl.innerHTML =
-        '<dialog class=u1x-modal>'+
+        '<dialog class="u1x-modal :modal">'+
         '	<form method=dialog>'+
                 options.body+
                 (options.buttons?'<div class=-buttons></div>':'')+
