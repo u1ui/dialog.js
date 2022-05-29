@@ -9,7 +9,6 @@
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/variables.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/classless.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/aria.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/table.class/table.css">
     <script src="../dialog.js" type=module></script>
@@ -17,10 +16,6 @@
 </head>
 
 <body>
-
-    <header>
-        <h1>dialog.js tests</h1>
-    </header>
 
 <script>
     var dialog = null;
@@ -31,7 +26,7 @@
 
 <section>
     <h2>alert, confirm, prompt</h2>
-    <table>
+    <table class="u1-table -Flex">
         <tr>
             <td>
                 <button id=test1>run</button>
@@ -119,7 +114,8 @@ nativ3.addEventListener('click',async e=>{
 </section>
 
 <style style="display:block" contenteditable>
-.u1x-modal {
+/* .u1x-modal { */
+:where(.\:modal, :modal) {
     width:18rem;
     box-shadow:0 0 1rem #0008;
     border:none;
