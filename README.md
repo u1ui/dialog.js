@@ -14,6 +14,7 @@ import {alert, prompt, confirm} from 'https://cdn.jsdelivr.net/gh/u1ui/dialog.js
 
 const name = await prompt('What is your name?', 'John Doe');
 ```
-## Demo
+## Demos
+https://raw.githack.com/u1ui/dialog.js/main/tests/minimal.html  
 https://raw.githack.com/u1ui/dialog.js/main/tests/test.html  
 
