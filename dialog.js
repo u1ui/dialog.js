@@ -2,7 +2,6 @@
 
 const d = document;
 
-
 d.head.insertAdjacentHTML(
     'afterbegin',
     '<style>'+
@@ -18,13 +17,12 @@ d.head.insertAdjacentHTML(
 
 class Dialog {
     constructor(options) {
-
         const tmpl = d.createElement('template');
         tmpl.innerHTML =
         '<dialog class="u1x-modal :modal">'+
         '	<form method=dialog>'+
                 options.body+
-                (options.buttons?'<div class=-buttons></div>':'')+
+                (options.buttons?'<div class=-buttons focusgroup></div>':'')+
         '	</form>'+
         '</dialog>';
         const element = this.element = tmpl.content.firstChild;
@@ -54,16 +52,28 @@ class Dialog {
     }
 }
 
+
+function toOptions(text) {
+    if (typeof text === 'string') {
+        return obj = {
+            body: htmlEntities(text)
+        };
+    }
+    return text;
+}
+
 export function alert(text) {
-    var dialog = new Dialog({
-        body:htmlEntities(text),
+    const options = toOptions(text)
+    const dialog = new Dialog({
+        body:options.body,
         buttons:[{title:'OK'}]
     });
     return dialog.show();
 };
 export function confirm(text) {
-    var dialog = new Dialog({
-        body:htmlEntities(text),
+    const options = toOptions(text)
+    const dialog = new Dialog({
+        body:options.body,
         buttons:[
             {title:'OK',then(){ dialog.value = true; } },
             {title:t('Cancel')}
@@ -73,14 +83,15 @@ export function confirm(text) {
     return dialog.show();
 };
 export function prompt(text, initial) {
-    var dialog = new Dialog({
-        body: htmlEntities(text)+'<input style="width:100%; display:block; margin-top:.5rem">',
+    const options = toOptions(text)
+    const dialog = new Dialog({
+        body: '<label>'+options.body+'<input style="width:100%; display:block; margin-top:.5rem"></label>',
         buttons:[
             {title:'OK',then(){ dialog.value = input.value; } },
             {title:t('Cancel')}
         ]
     });
-    var input = dialog.element.querySelector('input');
+    const input = dialog.element.querySelector('input');
     input.value = initial;
     setTimeout(()=>input.focus());
     dialog.value = null;
@@ -88,11 +99,11 @@ export function prompt(text, initial) {
 };
 /*
 export function form(html){
-    var dialog = new Dialog({
+    const dialog = new Dialog({
         body:html,
         buttons:[{title:'OK',then(){
-            var form = dialog.element.querySelector('form');
-            var data = {};
+            const form = dialog.element.querySelector('form');
+            const data = {};
             form.querySelectorAll('input,textarea').forEach(el=>{
                 data[el.name] = el.value;
                 if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
