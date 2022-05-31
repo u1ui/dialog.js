@@ -4,9 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name=viewport content="width=device-width">
+    <title>dialog.js minimal.html | U1 design-system</title>
+    <script src="../../u1/tests/test-init.js" type=module></script>
 
 <body>
 
+<script type=module>
+    import * as dialog from '../dialog.js';
+    window.dialog = dialog;
+</script>
 
 <section>
     <button onclick="dialog.alert('Just a test').then(console.log)">run</button>
@@ -18,13 +24,6 @@
     <button onclick="dialog.prompt('value:','100').then(console.log)">run</button>
     <button onclick="console.log(prompt('value:','100'))">run native</button>
 </section>
-
-<script>
-    var dialog = null;
-    import('../dialog.js').then(x=>{
-        dialog=x
-    });
-</script>
 
 <style>
 :where(.\:modal, :modal) {
@@ -38,12 +37,5 @@
 <style>
 button {
     text-align:left;
-    margin:1rem 0;
-}
-button::after {
-    content: attr(onclick);
-    font-weight:normal;
-    font-size:.9rem;
-    display:block;
 }
 </style>

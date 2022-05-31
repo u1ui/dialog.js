@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name=viewport content="width=device-width">
+    <title>dialog.js test.html | U1 design-system</title>
 
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/base.css/full.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/variables.min.css">
@@ -11,18 +12,18 @@
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/table.class/table.css">
-    <script src="../dialog.js" type=module></script>
+    <script src="../../u1/tests/test-init.js" type=module></script>
+
 
 </head>
 
 <body>
 
-<script>
-    var dialog = null;
-    import('../dialog.js').then(x=>{
-        dialog=x
-    });
+<script type=module>
+    import * as dialog from '../dialog.js';
+    window.dialog = dialog;
 </script>
+
 
 <section>
     <h2>alert, confirm, prompt</h2>
