@@ -43,6 +43,7 @@ class Dialog {
         const element = this.element;
         document.body.appendChild(element);
         element.showModal();
+        // element.classList.add(':modal'); better here to make it animatable?
         return new Promise((resolve, reject)=>{
             element.addEventListener('close',()=>{
                 resolve(this.value);
