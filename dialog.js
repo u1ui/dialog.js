@@ -56,7 +56,7 @@ class Dialog {
 
 function toOptions(text) {
     if (typeof text === 'string') {
-        return obj = {
+        return {
             body: htmlEntities(text)
         };
     }
@@ -64,7 +64,7 @@ function toOptions(text) {
 }
 
 export function alert(text) {
-    const options = toOptions(text)
+    const options = toOptions(text);
     const dialog = new Dialog({
         body:options.body,
         buttons:[{title:'OK'}]

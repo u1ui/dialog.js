@@ -83,6 +83,7 @@ nativ3.addEventListener('click',async e=>{
     <h2>Tests</h2>
 
     <button onclick="dialog.alert('Html content: <b>bold</b>')">Html content not parsed </button>
+    <button onclick="dialog.alert({body:'Html content: <b>bold</b>'})">Html parsed </button>
 
     <br>
     <br>
@@ -117,9 +118,9 @@ nativ3.addEventListener('click',async e=>{
 <style contenteditable>
 /* .u1x-modal { */
 :where(.\:modal, :modal) {
-    width:18rem;
-    box-shadow:0 0 1rem #0008;
-    border:none;
-    border-radius:.3rem;
+    width: 18rem;
+    box-shadow: 0 0 1rem #0008;
+    border: 0;
+    border-radius: .3rem;
 }
 </style>
