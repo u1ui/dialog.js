@@ -19,14 +19,13 @@ class Dialog {
     constructor(options) {
         const tmpl = d.createElement('template');
         tmpl.innerHTML =
-        '<dialog class="u1x-modal :modal">'+
+        '<dialog class="u1x-modal">'+
         '	<form method=dialog>'+
                 options.body+
                 (options.buttons?'<div class=-buttons focusgroup></div>':'')+
         '	</form>'+
         '</dialog>';
         const element = this.element = tmpl.content.firstChild;
-
         const btnCont = element.querySelector('.-buttons');
         options.buttons && options.buttons.forEach((btn, i)=>{
             const el = document.createElement('button');
@@ -43,7 +42,7 @@ class Dialog {
         const element = this.element;
         document.body.appendChild(element);
         element.showModal();
-        // element.classList.add(':modal'); better here to make it animatable?
+        element.classList.add(':modal');
         return new Promise((resolve, reject)=>{
             element.addEventListener('close',()=>{
                 resolve(this.value);
@@ -105,7 +104,7 @@ export function form(html){
         buttons:[{title:'OK',then(){
             const form = dialog.element.querySelector('form');
             const data = {};
-            form.querySelectorAll('input,textarea').forEach(el=>{
+            form.querySelectorAll('input,textarea,select').forEach(el=>{
                 data[el.name] = el.value;
                 if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
             });
