@@ -45,6 +45,11 @@
     <br><br>
     <button onclick="dialog.alert({body:'click on the backdrop',init:el=>el.classList.add('backdropClose')}).then(console.log)">backdropClose class</button>
     <br><br>
+    <button onclick="var dialog = this.nextElementSibling; dialog.open = !dialog.open">toggle non modal dialog</button>
+    <dialog open>
+        opan dialog
+    </dialog>
+    <br><br>
 
     <!--button id=formTest>form() (beta)</button>
     <script>
@@ -76,8 +81,9 @@
 <style contenteditable>
 
 dialog { transition: opacity .4s ease; opacity:0; }
+dialog[open] { opacity:1 }
 
-dialog:where(.\:modal, :modal) {
+dialog:is(.\:modal, :modal) {
     width: 18rem;
     box-shadow: 0 0 1rem #0008;
     border: 0;
