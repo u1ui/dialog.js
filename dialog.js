@@ -37,6 +37,7 @@ class Dialog {
             btnCont.appendChild(el);
             if (i === 0) setTimeout(()=>el.focus());
         });
+        options.init && options.init(this.element)
     }
     show(){
         const element = this.element;
@@ -55,42 +56,35 @@ class Dialog {
 
 function toOptions(text) {
     if (typeof text === 'string') {
-        return {
-            body: htmlEntities(text)
-        };
+        return { body: htmlEntities(text) };
     }
     return text;
 }
 
 export function alert(text) {
     const options = toOptions(text);
-    const dialog = new Dialog({
-        body:options.body,
-        buttons:[{title:'OK'}]
-    });
+    options.buttons = [{title:'OK'}];
+    const dialog = new Dialog(options);
     return dialog.show();
 };
 export function confirm(text) {
-    const options = toOptions(text)
-    const dialog = new Dialog({
-        body:options.body,
-        buttons:[
-            {title:'OK',then(){ dialog.value = true; } },
-            {title:t('Cancel')}
-        ]
-    });
+    const options = toOptions(text);
+    options.buttons = [
+        {title:'OK',then(){ dialog.value = true; } },
+        {title:t('Cancel')}
+    ];
+    const dialog = new Dialog(options);
     dialog.value = false;
     return dialog.show();
 };
 export function prompt(text, initial) {
-    const options = toOptions(text)
-    const dialog = new Dialog({
-        body: '<label>'+options.body+'<input style="width:100%; display:block; margin-top:.5rem"></label>',
-        buttons:[
-            {title:'OK',then(){ dialog.value = input.value; } },
-            {title:t('Cancel')}
-        ]
-    });
+    const options = toOptions(text);
+    options.body = '<label>'+options.body+'<input style="width:100%; display:block; margin-top:.5rem"></label>';
+    options.buttons = [
+        {title:'OK',then(){ dialog.value = input.value; } },
+        {title:t('Cancel')}
+    ];
+    const dialog = new Dialog(options);
     const input = dialog.element.querySelector('input');
     input.value = initial;
     setTimeout(()=>input.focus());
@@ -141,3 +135,67 @@ const text = {
         'nl':'Annuleren',
     }
 }
+
+addEventListener('click', e=>{
+    const el = e.target;
+    if (el.tagName !== 'DIALOG') return;
+    if (!el.classList.contains('backdropClose')) return;
+    const rect = el.getBoundingClientRect();
+    let isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    if (isInDialog) return;
+    el.close();
+    //hideAnimated(el, ()=>el.close());
+});
+
+
+/* Works! Waiting for demand
+needs css:
+dialog.animated[hidden] {
+    display:block !important;
+    pointer-events:none !important;
+}
+
+
+function hideAnimated(el, then) {
+    if (!el.classList.contains('animated')) {
+        then();
+        return;
+    }
+    el.style.animation = 'none'; // animation can be the same in reverse, so remove it first to avoid it not triggering
+    setTimeout(()=>{
+        el.style.animation = '';
+        const end = e=>{
+            if (e && e.type && e.target !== el) return;
+            el.hidden = false;
+            then && then();
+            el.removeEventListener('animationend',end);
+            el.removeEventListener('transitionend',end);
+            clearTimeout(timeout);
+            return;
+        }
+        el.addEventListener('animationend',end);
+        el.addEventListener('transitionend',end);
+        const timeout = setTimeout(end,2000);
+        el.hidden = true;
+    });
+
+};
+addEventListener('cancel', e=>{
+    if (e.defaultPrevented) return;
+    const el = e.target;
+    if (el.hidden) return;
+    if (!el.classList.contains('animated')) return;
+    e.preventDefault();
+    hideAnimated(el, ()=>el.close());
+}, true)
+addEventListener('submit', e=>{
+    if (e.defaultPrevented) return;
+    const form = e.target;
+    if (form.method!=='dialog') return;
+    const el = el.closest('.dialog');
+    if (el.hidden) return;
+    if (!el.classList.contains('animated')) return;
+    e.preventDefault();
+    hideAnimated(el, ()=>form.submit());
+}, true)
+/* */
