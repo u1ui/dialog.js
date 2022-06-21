@@ -1,4 +1,4 @@
-# undefined
+# dialog.js
 alert, prompt, confirm but async
 
 ## Features
@@ -21,21 +21,16 @@ alert, prompt, confirm but async
 <button onclick="console.log(prompt('value:','100'))">run native</button>
 ```
 
-## Demos
-
-https://raw.githack.com/u1ui/dialog.js/main/tests/minimal.html  
-https://raw.githack.com/u1ui/dialog.js/main/tests/test.html
-
 ## Install
 
-```html
-<script src="https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.0.2/dialog.min.js" type=module>
+```js
+import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.0.2/dialog.min.js"
 ```
 
-## Demo
+## Demos
 
-https://raw.githack.com/u1ui/dialog.js/main/tests/minimal.html  
-https://raw.githack.com/u1ui/dialog.js/main/tests/test.html  
+[minimal.html](https://raw.githack.com/u1ui/dialog.js/main/tests/minimal.html)  
+[test.html](https://raw.githack.com/u1ui/dialog.js/main/tests/test.html)  
 
 ## About
 
