@@ -79,7 +79,7 @@ export function confirm(text) {
 };
 export function prompt(text, initial) {
     const options = toOptions(text);
-    options.body = '<label>'+options.body+'<input style="width:100%; display:block; margin-top:.5rem"></label>';
+    options.body = '<label>'+options.body+'<input style="width:100%;display:block;margin-top:.5rem"></label>';
     options.buttons = [
         {title:'OK',then(){ dialog.value = input.value; } },
         {title:t('Cancel')}
