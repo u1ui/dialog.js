@@ -6,11 +6,11 @@ d.head.insertAdjacentHTML(
     'afterbegin',
     '<style>'+
     '.u1x-modal .-buttons {'+
-    '   display:flex;'+
-    '   flex-wrap:wrap;'+
-    '   justify-content:flex-end;'+
-    '   gap:.5rem;'+
-    '   margin-top:1rem;'+
+        'display:flex;'+
+        'flex-wrap:wrap;'+
+        'justify-content:flex-end;'+
+        'gap:.5rem;'+
+        'margin-top:1rem;'+
     '}'+
     '</style>'
 );
@@ -20,15 +20,15 @@ class Dialog {
         const tmpl = d.createElement('template');
         tmpl.innerHTML =
         '<dialog class="u1x-modal">'+
-        '	<form method=dialog>'+
+            '<form method=dialog>'+
                 options.body+
                 (options.buttons?'<div class=-buttons focusgroup></div>':'')+
-        '	</form>'+
+            '</form>'+
         '</dialog>';
         const element = this.element = tmpl.content.firstChild;
         const btnCont = element.querySelector('.-buttons');
         options.buttons && options.buttons.forEach((btn, i)=>{
-            const el = document.createElement('button');
+            const el = d.createElement('button');
             el.innerHTML = btn.title;
             el.value = btn.value;
             el.addEventListener('click', e=>{
@@ -41,9 +41,9 @@ class Dialog {
     }
     show(){
         const element = this.element;
-        document.body.appendChild(element);
+        d.body.appendChild(element);
         element.showModal();
-        element.classList.add(':modal');
+        element.classList.add(':modal'); // fallback for browsers that don't support :modal
         return new Promise((resolve, reject)=>{
             element.addEventListener('close',()=>{
                 resolve(this.value);
@@ -53,7 +53,6 @@ class Dialog {
     }
 }
 
-
 function toOptions(text) {
     if (typeof text === 'string') {
         return { body: htmlEntities(text) };
@@ -61,11 +60,11 @@ function toOptions(text) {
     return text;
 }
 
+
 export function alert(text) {
     const options = toOptions(text);
     options.buttons = [{title:'OK'}];
-    const dialog = new Dialog(options);
-    return dialog.show();
+    return new Dialog(options).show();
 };
 export function confirm(text) {
     const options = toOptions(text);
@@ -91,6 +90,7 @@ export function prompt(text, initial) {
     dialog.value = null;
     return dialog.show();
 };
+
 /*
 export function form(html){
     const dialog = new Dialog({
@@ -114,7 +114,6 @@ export function form(html){
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
 function t(v) {
     return text[v][lang()] || v;
 }
@@ -154,7 +153,6 @@ dialog.animated[hidden] {
     display:block !important;
     pointer-events:none !important;
 }
-
 
 function hideAnimated(el, then) {
     if (!el.classList.contains('animated')) {
