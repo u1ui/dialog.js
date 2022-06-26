@@ -12,14 +12,18 @@ alert, prompt, confirm but async
 
 ```html
 <button onclick="dialog.alert('Just a test').then(console.log)">run</button>
-<button onclick="console.log(alert('Just a test'))">run native</button>
-<br>
-<button onclick="dialog.confirm('Really?').then(console.log)">run</button>
-<button onclick="console.log(confirm('Really?'))">run native</button>
-<br>
-<button onclick="dialog.prompt('value:','100').then(console.log)">run</button>
-<button onclick="console.log(prompt('value:','100'))">run native</button>
 ```
+
+```css
+:where(.\:modal, :modal) {
+    width: 18rem;
+    box-shadow: 0 0 1rem #0008;
+    border: 0;
+    border-radius: .3rem;
+}
+```
+
+[doc](https://doc.deno.land/https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.0.2/dialog.js)
 
 ## Install
 
