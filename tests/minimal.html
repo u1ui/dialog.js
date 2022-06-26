@@ -6,22 +6,16 @@
     <title>dialog.js minimal.html | U1 design-system</title>
     <script src="../../u1/tests/test-init.js" type=module></script>
 
+    <script type=module>
+        import {alert} from '../dialog.js';
+        window.u1Alert = alert;
+    </script>
+
 <body>
 
-<script type=module>
-    import * as dialog from '../dialog.js';
-    window.dialog = dialog;
-</script>
 
 <section>
-    <button onclick="dialog.alert('Just a test').then(console.log)">run</button>
-    <button onclick="console.log(alert('Just a test'))">run native</button>
-    <br>
-    <button onclick="dialog.confirm('Really?').then(console.log)">run</button>
-    <button onclick="console.log(confirm('Really?'))">run native</button>
-    <br>
-    <button onclick="dialog.prompt('value:','100').then(console.log)">run</button>
-    <button onclick="console.log(prompt('value:','100'))">run native</button>
+    <button onclick="u1Alert('Just a test').then(console.log)">run</button>
 </section>
 
 <style>
@@ -30,11 +24,5 @@
     box-shadow: 0 0 1rem #0008;
     border: 0;
     border-radius: .3rem;
-}
-</style>
-
-<style>
-button {
-    text-align:left;
 }
 </style>
