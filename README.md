@@ -11,12 +11,11 @@ alert, prompt, confirm but async
 ## Ussage
 
 ```html
-<button onclick="dialog.alert('Just a test').then(console.log)">run</button>
+<button onclick="u1Alert('Just a test').then(console.log)">run</button>
 ```
 
 ```css
 :where(.\:modal, :modal) {
-    width: 18rem;
     box-shadow: 0 0 1rem #0008;
     border: 0;
     border-radius: .3rem;
@@ -33,8 +32,8 @@ import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.0.2/dialog.mi
 
 ## Demos
 
-[minimal.html](https://raw.githack.com/u1ui/dialog.js/main/tests/minimal.html)  
-[test.html](https://raw.githack.com/u1ui/dialog.js/main/tests/test.html)  
+[minimal.html](http://gcdn.li/u1ui/dialog.js@main/tests/minimal.html)  
+[test.html](http://gcdn.li/u1ui/dialog.js@main/tests/test.html)  
 
 ## About
 
