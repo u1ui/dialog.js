@@ -22,12 +22,12 @@ alert, prompt, confirm but async
 }
 ```
 
-[doc](https://doc.deno.land/https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.2.0/dialog.js)
+[doc](https://doc.deno.land/https://cdn.jsdelivr.net/gh/u1ui/dialog.js@$x.x.x/dialog.js)
 
 ## Install
 
 ```js
-import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@3.2.0/dialog.min.js"
+import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.min.js"
 ```
 
 ## Demos
