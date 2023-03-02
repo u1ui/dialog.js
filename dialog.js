@@ -53,11 +53,12 @@ class Dialog {
     }
 }
 
-function toOptions(text) {
-    if (typeof text === 'string') {
-        return { body: htmlEntities(text) };
+function toOptions(options) {
+    if (typeof options === 'string') {
+        options = { body: htmlEntities(options) };
     }
-    return text;
+    options.lang ??= lang();
+    return options;
 }
 
 
@@ -69,8 +70,8 @@ export function alert(text) {
 export function confirm(text) {
     const options = toOptions(text);
     options.buttons = [
-        {title:'OK',then(){ dialog.value = true; } },
-        {title:t('Cancel')}
+        {title: 'OK',then(){ dialog.value = true; } },
+        {title: translate(options.lang, 'Cancel')}
     ];
     const dialog = new Dialog(options);
     dialog.value = false;
@@ -80,8 +81,8 @@ export function prompt(text, initial) {
     const options = toOptions(text);
     options.body = '<label>'+options.body+'<input style="width:100%;display:block;margin-top:.5rem"></label>';
     options.buttons = [
-        {title:'OK',then(){ dialog.value = input.value; } },
-        {title:t('Cancel')}
+        {title: 'OK', then(){ dialog.value = input.value; } },
+        {title: translate(options.lang, 'Cancel')}
     ];
     const dialog = new Dialog(options);
     const input = dialog.element.querySelector('input');
@@ -114,8 +115,8 @@ export function form(html){
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-function t(v) {
-    return text[v][lang()] || v;
+function translate(lang, v) {
+    return text[v][lang] || v;
 }
 function lang() {
     return navigator.language.substring(0,2);
@@ -127,6 +128,7 @@ const text = {
         'es':'Cancelar',
         'it':'Annulla',
         'pt':'Cancelar',
+        'ua':'Скасувати',
         'ru':'Отмена',
         'ja':'キャンセル',
         'ko':'취소',
