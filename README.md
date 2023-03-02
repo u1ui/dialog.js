@@ -35,9 +35,7 @@ import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.mi
 To get sure your lib works even if the script does not load, you can fallback to the native confirm/alert/prompt function.
 
 ```js
-const {confirm} = await import('../fails/dialog.js').catch(e=>{
-    return {confirm: window.confirm};
-});
+const {confirm} = await import('../fails/dialog.js').catch(e=>window);
 await confirm('test');
 ```
 
