@@ -43,6 +43,8 @@
     <br><br>
     <button onclick="dialog.alert({body:'Html content: <b>bold</b>'})">Html parsed </button>
     <br><br>
+    <button onclick="dialog.prompt({body:'Annuler?', lang:'fr'}, '👍')">option "lang" </button>
+    <br><br>
     <button onclick="dialog.alert({body:'click on the backdrop',init:el=>el.classList.add('backdropClose')}).then(console.log)">backdropClose class</button>
     <br><br>
     <button onclick="var dialog = this.nextElementSibling; dialog.open = !dialog.open">toggle non modal dialog</button>
