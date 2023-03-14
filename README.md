@@ -22,7 +22,7 @@ alert, prompt, confirm but async
 }
 ```
 
-[doc](https://doc.deno.land/https://cdn.jsdelivr.net/gh/u1ui/dialog.js@$main/dialog.js)
+[doc](https://doc.deno.land/https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x/dialog.js)
 
 ## Install
 
