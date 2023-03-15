@@ -22,21 +22,27 @@ class Dialog {
         '<dialog class="u1x-modal">'+
             '<form method=dialog>'+
                 options.body+
-                (options.buttons?'<div class=-buttons focusgroup></div>':'')+
+                (options.buttons?'<div class=-buttons u1-focusgroup></div>':'')+
             '</form>'+
         '</dialog>';
         const element = this.element = tmpl.content.firstChild;
         const btnCont = element.querySelector('.-buttons');
-        options.buttons && options.buttons.forEach((btn, i)=>{
-            const el = d.createElement('button');
-            el.innerHTML = btn.title;
-            el.value = btn.value;
-            el.addEventListener('click', e=>{
-                btn.then && btn.then.call(this,e);
+        if (options.buttons) {
+
+            // import('https://cdn.jsdelivr.net/gh/u1ui/focusgroup.attr@1.0.0/focusgroup.js');
+            import('../focusgroup.attr@1.0.0/focusgroup.js');
+
+            options.buttons.forEach((btn, i)=>{
+                const el = d.createElement('button');
+                el.innerHTML = btn.title;
+                el.value = btn.value;
+                el.addEventListener('click', e=>{
+                    btn.then && btn.then.call(this,e);
+                });
+                btnCont.appendChild(el);
+                if (i === 0) setTimeout(()=>el.focus());
             });
-            btnCont.appendChild(el);
-            if (i === 0) setTimeout(()=>el.focus());
-        });
+        }
         options.init && options.init(this.element)
     }
     show(){
