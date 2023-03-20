@@ -7,15 +7,15 @@
     <script src="../../u1/tests/test-init.js" type=module></script>
 
     <script type=module>
-        import {alert} from '../dialog.js';
-        window.u1Alert = alert;
+        import * as module from '../dialog.js';
+        window.module = module;
     </script>
 
 <body>
 
 
 <section>
-    <button onclick="u1Alert('Just a test').then(console.log)">run</button>
+    <button onclick="module.alert('Just a test').then(console.log)">run</button>
 </section>
 
 <style>
