@@ -11,7 +11,7 @@ alert, prompt, confirm but async
 ## Ussage
 
 ```html
-<button onclick="u1Alert('Just a test').then(console.log)">run</button>
+<button onclick="module.alert('Just a test').then(console.log)">run</button>
 ```
 
 ```css
@@ -27,7 +27,7 @@ alert, prompt, confirm but async
 ## Install
 
 ```js
-import {dialog} from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.min.js"
+import * as module from "https://cdn.jsdelivr.net/gh/u1ui/dialog.js@x.x.x/dialog.min.js"
 ```
 
 ## Demos
