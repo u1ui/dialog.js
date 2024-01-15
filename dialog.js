@@ -143,8 +143,8 @@ const text = {
 }
 
 // close dialog on backdrop-click if it has the backdropClose-class
-addEventListener('click', e=>{
-    const el = e.target;
+addEventListener('click', event=>{
+    const el = event.target;
     if (el.tagName !== 'DIALOG') return;
     if (!el.classList.contains('backdropClose')) return;
     const rect = el.getBoundingClientRect();
