@@ -8,7 +8,7 @@ alert, prompt, confirm but async
 - Unstyled, style it yourself!
 - Lightweight
 
-## Ussage
+## Usage
 
 ```html
 <button onclick="module.alert('Just a test').then(console.log)">run</button>
