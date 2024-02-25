@@ -66,12 +66,28 @@ function toOptions(options) {
     return options;
 }
 
-
+/**
+ * Creates and shows a dialog with an alert message.
+ * @param {string} text - The text to be displayed in the alert dialog.
+ * @returns {Promise<undefined>} A Promise that resolves to undefined when the dialog is closed.
+ * @example
+ * await alert('This is an alert message');
+ */
 export function alert(text) {
     const options = toOptions(text);
     options.buttons = [{title:'OK'}];
     return new Dialog(options).show();
 };
+
+/**
+ * Creates and shows a dialog with a confirmation message.
+ * @param {string} text - The text to be displayed in the confirmation dialog.
+ * @returns {Promise<boolean>} A Promise that resolves to true if the user clicks the OK button, and false if the user clicks the Cancel button.
+ * @example
+ * if (await confirm('Do you want to delete this item?')) {
+ *    deleteItem();
+ * }
+ */
 export function confirm(text) {
     const options = toOptions(text);
     options.buttons = [
@@ -82,6 +98,15 @@ export function confirm(text) {
     dialog.value = false;
     return dialog.show();
 };
+
+/**
+ * Creates and shows a dialog with a prompt message.
+ * @param {string} text - The text to be displayed in the prompt dialog.
+ * @param {string} [initial] - The initial value of the input field.
+ * @returns {Promise<string>} A Promise that resolves to the value entered by the user, or null if the user clicks the Cancel button.
+ * @example
+ * const name = await prompt('Enter your name:');
+ */
 export function prompt(text, initial) {
     const options = toOptions(text);
     options.body = '<label>'+options.body+'<input style="width:100%;display:block;margin-top:.5rem"></label>';
