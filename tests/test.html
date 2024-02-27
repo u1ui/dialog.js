@@ -53,31 +53,34 @@
     </dialog>
     <br><br>
 
-    <!--button id=formTest>form() (beta)</button>
+    <button id=formTestHtml>form(html) beta</button>
     <script>
-        formTest.addEventListener('click',async e=>{
-            const result = await dialog.form(`
-            <b>Fill the form</b>
-            <div class="u1-table -Fields -Flex -NoSideGaps">
-                <div>
-                    <label>
-                        <div>Firstname:</div>
-                        <div><input name=firstname required></div>
-                    </label>
-                    <label>
-                        <div>Lastname:</div>
-                        <div><input name=lastname></div>
-                    </label>
-                    <label>
-                        <div>Accept AGB:</div>
-                        <div><input type=checkbox name=agb value=1></div>
-                    </label>
-                </div>
-            </div>
-            `);
-            console.log(result)
-        });
-    </script-->
+    formTestHtml.addEventListener('click',async e=>{
+        const result = await dialog.form(`
+        <h2>Fill the form</h2>
+        <div>
+            Gender: &nbsp;
+            <label><input type=radio name=gender value=female required> Female </label>
+            <label><input type=radio name=gender value=male> Male </label>
+        </div>
+        <label>
+            Firstname:
+            <input name=firstname required style="width:100%">
+        </label>
+        <label>
+            Lastname:
+            <input name=lastname style="width:100%">
+        </label>
+        <label>
+            Accept AGB: 
+            <input type=checkbox name=agb value=1 required>
+        </label>
+        `);
+        result && dialog.alert('Thank you '+result.firstname+'!');
+        console.log(result)
+    });
+    </script>
+
 </section>
 
 <style contenteditable>

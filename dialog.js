@@ -1,19 +1,6 @@
-// import 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill/dialog.min.js'; // todo?
-
-const d = document;
-
-d.head.insertAdjacentHTML(
-    'afterbegin',
-    '<style>'+
-    '.u1x-modal .-buttons {'+
-        'display:flex;'+
-        'flex-wrap:wrap;'+
-        'justify-content:flex-end;'+
-        'gap:.5rem;'+
-        'margin-top:1rem;'+
-    '}'+
-    '</style>'
-);
+// TODO: 
+// should we move the dom inside shadowDom to avoid style conflicts?
+// or should we add an option to use shadowDom or just to define the container for the dialog-element?
 
 class Dialog {
     constructor(options) {
@@ -35,6 +22,7 @@ class Dialog {
                 const el = d.createElement('button');
                 el.innerHTML = btn.title;
                 el.value = btn.value;
+                el.type = btn.type || 'submit';
                 el.addEventListener('click', e=>{
                     btn.then && btn.then.call(this,e);
                 });
@@ -56,14 +44,6 @@ class Dialog {
             });
         });
     }
-}
-
-function toOptions(options) {
-    if (typeof options === 'string') {
-        options = { body: htmlEntities(options) };
-    }
-    options.lang ??= lang();
-    return options;
 }
 
 /**
@@ -122,26 +102,70 @@ export function prompt(text, initial) {
     return dialog.show();
 };
 
-/*
+/* */
 export function form(html){
+
     const dialog = new Dialog({
         body:html,
-        buttons:[{title:'OK',then(){
+        buttons:[{title:'OK',then(){ // TODO: triggers by click but would be better by form.submit?
             const form = dialog.element.querySelector('form');
-            const data = {};
-            form.querySelectorAll('input,textarea,select').forEach(el=>{
-                data[el.name] = el.value;
-                if (el.type === 'checkbox') data[el.name] = el.checked ? el.value : null;
-            });
-            dialog.value = data;
-        }}]
+            if (!form.checkValidity()) dialog.value = null;
+            else {
+                const data = Object.fromEntries(new FormData(form).entries());
+                dialog.value = data;
+            }
+        }},{title: translate(lang(), 'Cancel'), type:'button', then(){
+            dialog.element.close();
+        }}],
     });
     return dialog.show();
 }
-*/
+/* */
+
+
+/* init */
+const d = document;
+
+d.head.insertAdjacentHTML(
+    'afterbegin',
+    '<style>'+
+    '.u1x-modal .-buttons {'+
+        'display:flex;'+
+        'flex-wrap:wrap;'+
+        'justify-content:flex-end;'+
+        'gap:.5rem;'+
+        'margin-top:1rem;'+
+    '}'+
+    '</style>'
+);
+
+
+
+// close dialog on backdrop-click if it has the backdropClose-class
+addEventListener('click', event=>{
+    const el = event.target;
+    if (el.tagName !== 'DIALOG') return;
+    if (!el.classList.contains('backdropClose')) return;
+    const rect = el.getBoundingClientRect();
+    let isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+    if (isInDialog) return;
+    el.close();
+    //hideAnimated(el, ()=>el.close());
+});
+
 
 
 // helper functions
+
+function toOptions(options) {
+    if (typeof options === 'string') {
+        options = { body: htmlEntities(options) };
+    }
+    options.lang ??= lang();
+    return options;
+}
+
+
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -166,18 +190,6 @@ const text = {
         'nl':'Annuleren',
     }
 }
-
-// close dialog on backdrop-click if it has the backdropClose-class
-addEventListener('click', event=>{
-    const el = event.target;
-    if (el.tagName !== 'DIALOG') return;
-    if (!el.classList.contains('backdropClose')) return;
-    const rect = el.getBoundingClientRect();
-    let isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-    if (isInDialog) return;
-    el.close();
-    //hideAnimated(el, ()=>el.close());
-});
 
 
 /* Works! Waiting for demand
