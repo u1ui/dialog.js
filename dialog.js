@@ -17,15 +17,15 @@ d.head.insertAdjacentHTML(
 
 class Dialog {
     constructor(options) {
-        const tmpl = d.createElement('template');
-        tmpl.innerHTML =
-        '<dialog class="u1x-modal">'+
-            '<form method=dialog>'+
-                options.body+
-                (options.buttons?'<div class=-buttons u1-focusgroup></div>':'')+
-            '</form>'+
-        '</dialog>';
-        const element = this.element = tmpl.content.firstChild;
+
+        const element = this.element = d.createElement('dialog');
+        element.classList.add('u1x-modal');
+        element.innerHTML = 
+            `<form method=dialog>
+                ${options.body}
+                ${options.buttons?'<div class="-buttons u1-focusgroup"></div>':''}
+            </form>`;
+
         const btnCont = element.querySelector('.-buttons');
         if (options.buttons) {
 
