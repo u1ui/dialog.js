@@ -16,7 +16,7 @@ class Dialog {
         const btnCont = element.querySelector('.-buttons');
         if (options.buttons) {
 
-            import('../focusgroup.attr@3.0.0/focusgroup.js'); // https://cdn.jsdelivr.net/gh/u1ui/focusgroup.attr@3.0.0/focusgroup.js
+            import('../focusgroup.attr@4.0.0/focusgroup.js'); // https://cdn.jsdelivr.net/gh/u1ui/focusgroup.attr@4.0.0/focusgroup.js
 
             options.buttons.forEach((btn, i)=>{
                 const el = d.createElement('button');
