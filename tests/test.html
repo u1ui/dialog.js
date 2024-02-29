@@ -14,6 +14,8 @@
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
     <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/table.class/table.css">
 
+    <script src="../../code.el/code.js" type=module></script>
+    <link rel=stylesheet href="../../code.el/code.css">
 
 </head>
 
@@ -83,9 +85,12 @@
 
 </section>
 
-<style contenteditable>
+<style> u1-code { font-size:14px; border:1px solid var(--color-line); padding:1rem; }  </style>
 
-dialog { transition: opacity .4s ease; opacity:0; }
+<u1-code editable trim>
+    <style>
+
+dialog { transition: opacity 1s ease; opacity:0; }
 dialog[open] { opacity:1 }
 
 dialog:is(.\:modal, :modal) {
@@ -95,8 +100,40 @@ dialog:is(.\:modal, :modal) {
     border-radius: .3rem;
     opacity:1;
 }
-
 /* dialog:where(.\:modal, :modal)[hidden] { opacity:0; transition-duration:1s; } close animation, still commented out in code */
+    </style>
+</u1-code>
 
 
-</style>
+<!-- /* new variant using @starting-style and transition-behavior: allow-discrete; (chromium for now) */
+dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+}
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: translateY(-80vh);
+  }
+}
+dialog {
+  opacity: 0;
+  transform: translateY(-80vh);
+  transition: 0.4s ease-in-out; 
+  transition-behavior: allow-discrete;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: 0.4s ease-in-out; 
+  transition-behavior: allow-discrete;
+}
+dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 25%);
+}
+@starting-style {
+  dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0%);
+  }
+}
+-->
