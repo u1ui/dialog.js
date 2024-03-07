@@ -1,6 +1,7 @@
 // TODO: 
-// should we move the dom inside shadowDom to avoid style conflicts?
-// or should we add an option to use shadowDom or just to define the container for the dialog-element?
+// - should we move the dom inside shadowDom to avoid style conflicts?
+//  or should we add an option to use shadowDom or just to define the container for the dialog-element?
+// - rename to modal.js? see <iframe sandbox="allow-modals">
 
 class Dialog {
     constructor(options) {
@@ -192,7 +193,11 @@ const text = {
 }
 
 
-/* Works! Waiting for demand
+/* 
+
+Works! Waiting for demand
+There are standards on the way that allow animations (@starting-style, transition-behavior: allow-discrete;)
+
 needs css:
 dialog.animated[hidden] {
     display:block !important;

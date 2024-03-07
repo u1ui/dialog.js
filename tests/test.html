@@ -7,12 +7,12 @@
     <script src="../../u1/tests/test-init.js" type=module></script>
     <title>dialog.js test.html | U1 design-system</title>
 
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/base.css/full.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/variables.min.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/classless.min.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/more.min.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/classless.css/simple.min.css">
-    <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/table.class/table.css">
+    <link rel=stylesheet href="../../base.css/full.css">
+    <link rel=stylesheet href="../../classless.css/variables.min.css">
+    <link rel=stylesheet href="../../classless.css/classless.min.css">
+    <link rel=stylesheet href="../../classless.css/more.min.css">
+    <link rel=stylesheet href="../../classless.css/simple.min.css">
+    <link rel=stylesheet href="../../table.class/table.css">
 
     <script src="../../code.el/code.js" type=module></script>
     <link rel=stylesheet href="../../code.el/code.css">
@@ -48,11 +48,6 @@
     <button onclick="dialog.prompt({body:'Annuler?', lang:'fr'}, '👍')">option "lang" </button>
     <br><br>
     <button onclick="dialog.alert({body:'click on the backdrop',init:el=>el.classList.add('backdropClose')}).then(console.log)">backdropClose class</button>
-    <br><br>
-    <button onclick="var dialog = this.nextElementSibling; dialog.open = !dialog.open">toggle non modal dialog</button>
-    <dialog open>
-        opan dialog
-    </dialog>
     <br><br>
 
     <button id=formTestHtml>form(html) beta</button>
